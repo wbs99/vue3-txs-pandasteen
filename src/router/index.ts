@@ -1,4 +1,4 @@
-import { Forth } from './../components/Forth';
+import { Forth } from '../components/welcomes/Forth';
 import { Third } from './../components/welcomes/Third';
 import { Second } from './../components/welcomes/Second';
 import { First } from './../components/welcomes/First';
