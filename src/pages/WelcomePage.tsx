@@ -1,16 +1,31 @@
 import { defineComponent, ref, Transition, VNode, watchEffect } from 'vue';
-import { RouteLocationNormalizedLoaded, RouterView } from 'vue-router';
+import { RouteLocationNormalizedLoaded, RouterView, useRoute, useRouter } from 'vue-router';
 import { useSwiper } from '../hooks/useSwiper';
+import { throttle } from '../shared/throttle';
 import s from './Welcome.module.scss'
 
 export const WelcomePage = defineComponent({
 
   setup: (props, context) => {
-    const mainRef = ref<HTMLElement | null>(null)
+    const mainRef = ref<HTMLElement>()
     const { direction } = useSwiper(mainRef)
+    const route = useRoute()
+    const router = useRouter()
+    const routerMap: Record<string, string> = {
+      'Welcome1': '/welcome/2',
+      'Welcome2': '/welcome/3',
+      'Welcome3': '/welcome/4',
+      'Welcome4': '/start',
+    }
+    const push = throttle(() => {
+      const name = (route.name || 'Welcome1').toString()
+      router.push(routerMap[name])
+    }, 500)
+
     watchEffect(() => {
-      console.log('direction')
-      console.log(direction.value)
+      if (direction.value === 'left') {
+        push()
+      }
     })
     return () => (
       <div class={s.wrapper}>

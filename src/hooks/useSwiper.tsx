@@ -1,10 +1,10 @@
 import { computed, onMounted, onUnmounted, ref, Ref } from "vue"
 
-export const useSwiper = (element: Ref<HTMLElement | null>) => {
+export const useSwiper = (element: Ref<HTMLElement | undefined>) => {
   type Point = { x: number; y: number }
 
-  const start = ref<Point | null>(null)
-  const end = ref<Point | null>(null)
+  const start = ref<Point>()
+  const end = ref<Point>()
   const moving = ref(false)
   const distance = computed(() => {
     if (!start.value || !end.value) { return }
@@ -25,11 +25,12 @@ export const useSwiper = (element: Ref<HTMLElement | null>) => {
   })
 
   const onTouchStart = (e: TouchEvent) => {
+    e.preventDefault()
     start.value = {
       x: e.touches[0].clientX,
       y: e.touches[0].clientY,
     }
-    end.value = null
+    end.value = undefined
     moving.value = true
   }
   const onMoving = (e: TouchEvent) => {
@@ -39,8 +40,8 @@ export const useSwiper = (element: Ref<HTMLElement | null>) => {
     }
   }
   const onTouchEnd = (e: TouchEvent) => {
-    start.value = null
-    end.value = null
+    start.value = undefined
+    end.value = undefined
     moving.value = false
   }
 
