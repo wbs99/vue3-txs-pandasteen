@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue';
-import s from './First.module.scss';
+import s from './welcome.module.scss';
 
 export const WelcomeLayout = defineComponent({
   setup: (props, context) => {

@@ -6,6 +6,10 @@ import { WelcomePage } from './../pages/WelcomePage';
 import { NotFoundPage } from './../pages/NotFoundPage';
 
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import { FirstActions } from '../components/welcomes/FirstActions';
+import { ForthActions } from '../components/welcomes/ForthActions';
+import { SecondActions } from '../components/welcomes/SecondActions';
+import { ThirdActions } from '../components/welcomes/ThirdActions';
 
 const routes: RouteRecordRaw[] = [
   { path: "/", redirect: "/welcome" },
@@ -13,10 +17,10 @@ const routes: RouteRecordRaw[] = [
     path: '/welcome', component: WelcomePage,
     children: [
       { path: '', redirect: '/welcome/1' },
-      { path: '1', component: First },
-      { path: '2', component: Second },
-      { path: '3', component: Third },
-      { path: '4', component: Forth },
+      { path: '1', components: { main: First, footer: FirstActions } },
+      { path: '2', components: { main: Second, footer: SecondActions } },
+      { path: '3', components: { main: Third, footer: ThirdActions } },
+      { path: '4', components: { main: Forth, footer: ForthActions } },
     ]
   },
   { path: "/:pathMatch(.*)", component: NotFoundPage },
