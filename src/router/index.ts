@@ -1,10 +1,10 @@
+import { StartPage } from './../pages/StartPage';
 import { Forth } from '../components/welcomes/Forth';
 import { Third } from './../components/welcomes/Third';
 import { Second } from './../components/welcomes/Second';
 import { First } from './../components/welcomes/First';
 import { WelcomePage } from './../pages/WelcomePage';
 import { NotFoundPage } from './../pages/NotFoundPage';
-
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import { FirstActions } from '../components/welcomes/FirstActions';
 import { ForthActions } from '../components/welcomes/ForthActions';
@@ -23,6 +23,7 @@ const routes: RouteRecordRaw[] = [
       { path: '4', name: 'Welcome4', components: { main: Forth, footer: ForthActions } },
     ]
   },
+  { path: "/start", component: StartPage },
   { path: "/:pathMatch(.*)", component: NotFoundPage },
 ]
 const history = createWebHashHistory()
