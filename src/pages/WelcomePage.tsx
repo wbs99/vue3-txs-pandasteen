@@ -1,14 +1,15 @@
 import { defineComponent, Transition, VNode } from 'vue';
 import { RouteLocationNormalizedLoaded, RouterView } from 'vue-router';
 import s from './Welcome.module.scss'
-import logo from '../assets/icons/panda.svg'
 
 export const WelcomePage = defineComponent({
   setup: (props, context) => {
     return () => (
       <div class={s.wrapper}>
         <header>
-          <img src={logo} alt="logo" />
+          <svg>
+            <use xlinkHref='#panda'></use>
+          </svg>
           <h1>熊猫记账</h1>
         </header>
         <main class={s.main}>
