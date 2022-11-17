@@ -13,6 +13,9 @@ import { ThirdActions } from '../components/welcomes/ThirdActions';
 import { ItemCreate } from '../components/items/ItemCreate';
 import { ItemList } from '../components/items/ItemList';
 import { ItemPage } from '../pages/ItemPage';
+import { TagCreate } from '../components/tags/TagCreate';
+import { TagEdit } from '../components/tags/TagEdit';
+import { TagPage } from '../pages/TagPage';
 
 const routes: RouteRecordRaw[] = [
   { path: "/", redirect: "/welcome" },
@@ -32,6 +35,13 @@ const routes: RouteRecordRaw[] = [
     children: [
       { path: '', component: ItemList },
       { path: 'create', component: ItemCreate },
+    ]
+  },
+  {
+    path: '/tags', component: TagPage,
+    children: [
+      { path: 'create', component: TagCreate },
+      { path: ':id', component: TagEdit }
     ]
   },
   { path: "/:pathMatch(.*)", component: NotFoundPage },
