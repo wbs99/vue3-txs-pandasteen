@@ -1,4 +1,5 @@
 import { defineComponent, ref } from 'vue';
+import { RouterLink } from 'vue-router';
 import { AsideMenu } from '../components/AsideMenu';
 import { Button } from '../components/Button';
 import { Center } from '../components/Center';
@@ -26,9 +27,13 @@ export const StartPage = defineComponent({
           <Icon name='welcome1' class={s.pig} />
         </Center>
         <div class={s.button_wrapper}>
-          <Button class={s.button}>开始记账</Button>
+          <RouterLink to="/items/create">
+            <Button class={s.button}>开始记账</Button>
+          </RouterLink>
         </div>
-        <FloatButton iconName='add' />
+        <RouterLink to="/items/create">
+          <FloatButton iconName='add' />
+        </RouterLink>
         {menuVisible.value && <AsideMenu onClose={() => { menuVisible.value = false }} />}
       </div>
     )

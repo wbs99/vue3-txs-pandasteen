@@ -10,6 +10,9 @@ import { FirstActions } from '../components/welcomes/FirstActions';
 import { ForthActions } from '../components/welcomes/ForthActions';
 import { SecondActions } from '../components/welcomes/SecondActions';
 import { ThirdActions } from '../components/welcomes/ThirdActions';
+import { ItemCreate } from '../components/items/ItemCreate';
+import { ItemList } from '../components/items/ItemList';
+import { ItemPage } from '../pages/ItemPage';
 
 const routes: RouteRecordRaw[] = [
   { path: "/", redirect: "/welcome" },
@@ -24,6 +27,13 @@ const routes: RouteRecordRaw[] = [
     ]
   },
   { path: "/start", component: StartPage },
+  {
+    path: '/items', component: ItemPage,
+    children: [
+      { path: '', component: ItemList },
+      { path: 'create', component: ItemCreate },
+    ]
+  },
   { path: "/:pathMatch(.*)", component: NotFoundPage },
 ]
 const history = createWebHashHistory()
