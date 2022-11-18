@@ -6,4 +6,12 @@
   font-size: var(--button-font-size);
   height: var(--button-height);
   padding: 8px 16px;
+  &.normal {
+  }
+  &.important {
+  }
+  &.danger {
+    background: var(--button-bg-danger);
+    border-color: var(--button-bg-danger);
+  }
 }

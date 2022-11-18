@@ -41,7 +41,7 @@ const routes: RouteRecordRaw[] = [
     path: '/tags', component: TagPage,
     children: [
       { path: 'create', component: TagCreate },
-      { path: ':id', component: TagEdit }
+      { path: ':id/edit', component: TagEdit }
     ]
   },
   { path: "/:pathMatch(.*)", component: NotFoundPage },

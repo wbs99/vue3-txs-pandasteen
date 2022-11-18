@@ -1,15 +1,12 @@
-import { defineComponent, PropType } from 'vue';
+import { defineComponent } from 'vue';
 import { Navbar } from '../components/NavBar';
+import s from './MainLayout.module.scss'
+
 export const MainLayout = defineComponent({
-  props: {
-    name: {
-      type: String as PropType<string>
-    }
-  },
   setup: (props, { slots }) => {
     return () => (
-      <div>
-        <Navbar>
+      <div class={s.wrapper} >
+        <Navbar class={s.nav}>
           {{
             title: () => slots.title?.(),
             icon: () => slots.icon?.()

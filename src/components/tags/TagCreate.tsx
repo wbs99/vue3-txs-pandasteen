@@ -4,7 +4,7 @@ import { Rules, validate } from '../../shared/validate';
 import { Button } from '../Button';
 import { EmojiSelect } from '../EmojiSelect';
 import { Icon } from '../Icon';
-import s from './TagCreate.module.scss';
+import s from './Tag.module.scss';
 export const TagCreate = defineComponent({
   setup: (props, context) => {
     const formData = reactive({
