@@ -47,7 +47,7 @@ export const ItemList = defineComponent({
     return () => (
       <MainLayout>
         {{
-          title: () => '山竹记账',
+          title: () => '熊猫记账',
           icon: () => <Icon name="menu" />,
           default: () => <>
             <Tabs v-model:selected={refSelected.value}

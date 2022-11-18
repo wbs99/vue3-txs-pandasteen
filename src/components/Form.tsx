@@ -1,6 +1,7 @@
 import { DatetimePicker, Popup } from 'vant';
 import { computed, defineComponent, PropType, ref } from 'vue';
 import { Time } from '../shared/time';
+import { Button } from './Button';
 import { EmojiSelect } from './EmojiSelect';
 
 
@@ -30,16 +31,17 @@ export const FormItem = defineComponent({
       type: [String, Number]
     },
     type: {
-      type: String as PropType<'text' | 'emojiSelect' | 'date'>,
+      type: String as PropType<'text' | 'emojiSelect' | 'date' | 'validationCode'>,
     },
     error: {
       type: String
-    }
+    },
+    placeholder: String,
   },
   emits: ['update:modelValue'],
   setup: (props, { emit, slots }) => {
     const refDateVisible = ref(false)
-    const { type, label, modelValue, error } = props
+    const { type, label, modelValue, error, placeholder } = props
     const content = computed(() => {
       switch (type) {
         case 'text':
@@ -52,11 +54,22 @@ export const FormItem = defineComponent({
             modelValue={modelValue?.toString()}
             onUpdateModelValue={value => emit('update:modelValue', value)}
             class={[s.formItem, s.emojiList, s.error]} />
+        case 'validationCode':
+          return <>
+            <input class={[s.formItem, s.input, s.validationCodeInput]}
+              placeholder={placeholder} />
+            <Button class={[s.formItem, s.button, s.validationCodeButton]}>
+              发送验证码
+            </Button>
+          </>
         case 'date':
           return <>
-            <input readonly={true} value={modelValue}
+            <input
+              readonly={true} value={modelValue}
+              placeholder={placeholder}
               onClick={() => { refDateVisible.value = true }}
-              class={[s.formItem, s.input]} />
+              class={[s.formItem, s.input]}
+            />
             <Popup position='bottom' v-model:show={refDateVisible.value}>
               <DatetimePicker value={modelValue} type="date" title="选择年月日"
                 onConfirm={(date: Date) => {
@@ -78,11 +91,9 @@ export const FormItem = defineComponent({
           <div class={s.formItem_value}>
             {content.value}
           </div>
-          {error &&
-            <div class={s.formItem_errorHint}>
-              <span>{error}</span>
-            </div>
-          }
+          <div class={s.formItem_errorHint}>
+            <span>{error ?? '　'}</span>
+          </div>
         </label>
       </div>
     }
