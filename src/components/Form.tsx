@@ -36,7 +36,8 @@ export const FormItem = defineComponent({
       type: String
     }
   },
-  setup: (props, context) => {
+  emits: ['update:modelValue'],
+  setup: (props, { emit, slots }) => {
     const refDateVisible = ref(false)
     const { type, label, modelValue, error } = props
     const content = computed(() => {
@@ -44,28 +45,28 @@ export const FormItem = defineComponent({
         case 'text':
           return <input
             value={modelValue}
-            onInput={(e: any) => context.emit('update:modelValue', e.target.value)}
+            onInput={(e: any) => emit('update:modelValue', e.target.value)}
             class={[s.formItem, s.input, s.error]} />
         case 'emojiSelect':
           return <EmojiSelect
             modelValue={modelValue?.toString()}
-            onUpdateModelValue={value => context.emit('update:modelValue', value)}
+            onUpdateModelValue={value => emit('update:modelValue', value)}
             class={[s.formItem, s.emojiList, s.error]} />
         case 'date':
           return <>
-            <input readonly={true} value={props.modelValue}
+            <input readonly={true} value={modelValue}
               onClick={() => { refDateVisible.value = true }}
               class={[s.formItem, s.input]} />
             <Popup position='bottom' v-model:show={refDateVisible.value}>
-              <DatetimePicker value={props.modelValue} type="date" title="选择年月日"
+              <DatetimePicker value={modelValue} type="date" title="选择年月日"
                 onConfirm={(date: Date) => {
-                  context.emit('update:modelValue', new Time(date).format())
+                  emit('update:modelValue', new Time(date).format())
                   refDateVisible.value = false
                 }}
                 onCancel={() => refDateVisible.value = false} />
             </Popup></>
         case undefined:
-          return context.slots.default?.()
+          return slots.default?.()
       }
     })
     return () => {
