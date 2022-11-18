@@ -1,5 +1,5 @@
 import { Overlay } from 'vant';
-import { defineComponent, PropType, reactive, ref, watchEffect } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 import { MainLayout } from '../../Layouts/MainLayout';
 import { Time } from '../../shared/time';
 import { Form, FormItem } from '../Form';
@@ -39,6 +39,9 @@ export const ItemList = defineComponent({
       if (refSelected.value === '自定义时间') {
         refOverlayVisible.value = true
       }
+    }
+    const onDatePickerCancel = () => {
+      refOverlayVisible.value = false
     }
 
     return () => (
@@ -81,7 +84,7 @@ export const ItemList = defineComponent({
                     <FormItem label='结束时间' v-model={customTime.end} type='date' />
                     <FormItem>
                       <div class={s.actions}>
-                        <button type="button">取消</button>
+                        <button type="button" onClick={onDatePickerCancel}>取消</button>
                         <button type="submit">确认</button>
                       </div>
                     </FormItem>

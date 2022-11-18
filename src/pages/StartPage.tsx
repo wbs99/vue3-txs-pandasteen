@@ -1,6 +1,6 @@
 import { defineComponent, ref } from 'vue';
 import { RouterLink } from 'vue-router';
-import { AsideMenu } from '../components/AsideMenu';
+import { AsideMenuIcon } from '../components/AsideMenu';
 import { Button } from '../components/Button';
 import { Center } from '../components/Center';
 import { FloatButton } from '../components/FloatButton';
@@ -18,7 +18,7 @@ export const StartPage = defineComponent({
       <MainLayout>
         {{
           title: () => '熊猫记账',
-          icon: () => <Icon name='menu' class={s.navIcon} onClick={onClickMenu} />,
+          icon: () => <AsideMenuIcon />,
           default: () => <>
             <Center class={s.pig_wrapper}>
               <Icon name='welcome1' class={s.pig} />
@@ -31,7 +31,6 @@ export const StartPage = defineComponent({
             <RouterLink to="/items/create">
               <FloatButton iconName='add' />
             </RouterLink>
-            {menuVisible.value && <AsideMenu onClose={() => { menuVisible.value = false }} />}
           </>
         }}
       </MainLayout>

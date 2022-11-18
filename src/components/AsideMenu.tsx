@@ -1,4 +1,4 @@
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import s from './AsideMenu.module.scss';
 import { Icon } from './Icon';
@@ -40,6 +40,20 @@ export const AsideMenu = defineComponent({
           </ul>
         </nav>
       </div>
+    </>
+  }
+})
+
+
+export const AsideMenuIcon = defineComponent({
+  setup: (props, context) => {
+    const menuVisible = ref(false)
+    const onClickMenu = () => {
+      menuVisible.value = !menuVisible.value
+    }
+    return () => <>
+      <Icon name='menu' class={s.icon} onClick={onClickMenu} />
+      {menuVisible.value && <AsideMenu onClose={() => { menuVisible.value = false }} />}
     </>
   }
 })
