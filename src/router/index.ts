@@ -17,6 +17,7 @@ import { TagCreate } from '../components/tags/TagCreate';
 import { TagEdit } from '../components/tags/TagEdit';
 import { TagPage } from '../pages/TagPage';
 import { SignInPage } from '../pages/SignInPage';
+import { StatisticsPage } from '../pages/StatisticsPage';
 
 const routes: RouteRecordRaw[] = [
   { path: "/", redirect: "/welcome" },
@@ -47,6 +48,9 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/sign_in', component: SignInPage
+  },
+  {
+    path: '/statistics', component: StatisticsPage
   },
   { path: "/:pathMatch(.*)", component: NotFoundPage },
 ]
