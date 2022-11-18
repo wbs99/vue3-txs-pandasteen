@@ -8,11 +8,7 @@ import { Tab, Tabs } from '../Tabs';
 import s from './ItemList.module.scss';
 import { ItemSummary } from './ItemSummary';
 export const ItemList = defineComponent({
-  props: {
-    name: {
-      type: String as PropType<string>
-    }
-  },
+
   setup: (props, context) => {
     const refOverlayVisible = ref(false)
     const refSelected = ref('本月')
@@ -35,15 +31,14 @@ export const ItemList = defineComponent({
         end: time.lastDayOfYear()
       }
     ]
-
-    watchEffect(() => {
-      if (refSelected.value === '自定义时间') {
-        refOverlayVisible.value = true
-      }
-    })
     const onSubmitCustomTime = (e: Event) => {
       e.preventDefault()
       refOverlayVisible.value = false
+    }
+    const onSelect = () => {
+      if (refSelected.value === '自定义时间') {
+        refOverlayVisible.value = true
+      }
     }
 
     return () => (
@@ -52,7 +47,8 @@ export const ItemList = defineComponent({
           title: () => '山竹记账',
           icon: () => <Icon name="menu" />,
           default: () => <>
-            <Tabs v-model:selected={refSelected.value}>
+            <Tabs v-model:selected={refSelected.value}
+              onUpdate:selected={onSelect}>
               <Tab name="本月">
                 <ItemSummary
                   startDate={timeList[0].start.format()}
